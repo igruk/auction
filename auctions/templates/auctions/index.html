@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div class="centered">
+    <section class="cards">
+        {% for auction in auctions %}
+            <article class="card">
+                <a href="{{ auction.get_absolute_url }}">
+                <figure class="thumbnail">
+                {% if auction.image %}
+                    <img src="{{ auction.image.url }}" alt='Product'>
+                {% else %}
+                    <img src="https://image.shutterstock.com/image-vector/no-image-available-vector-hand-260nw-745639717.jpg" alt="NoImage">
+                {% endif %}
+                </figure>
+                <div class="card-content">
+                    <h2 style="text-align: center;">{{auction.title}}</h2>
+                    <p style="text-align: center;">
+                        {% if auction.current_bid %}
+                            <strong>&dollar;{{auction.current_bid}}</strong>
+                        {% else %}
+                            <strong>&dollar;{{auction.starting_bid}}</strong>
+                        {% endif %}
+                    </p>
+                </div>
+                </a>
+            </article>
+        {% endfor %}
+    </section>
+</div>
+
+{% endblock %}
